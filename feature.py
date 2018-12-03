@@ -25,8 +25,21 @@ def extract_features(args):
             os.makedirs(path)
             
     # Iterate over wav audio files in input directory
-    
-    
+    for data_type in ["train", "test"]:
+        path_in = os.path.join(args.input_dir, data_type)
+        for filename in os.listdir(path):
+            if filename.endswith(".wav"):
+                # in
+                file_in = os.path.join(path_in, filename)
+                # out
+                path_out = os.path.join(args.output_dir, data_type)
+                csv_out = os.path.join(path_out, filename + config + ".csv")
+                arff_out = os.path.join(path_out, filename + config + ".arff")
+                
+                # use openSMILE
+                call(["SMILExtract", "-l", "0", "-noconsoleoutput", "-i", file_in, 
+                      "-c", args.config, "-D", csv_out, "-O", arff_out, "-instname", filename, "-label", args.label])
+                
     return True
     
 
