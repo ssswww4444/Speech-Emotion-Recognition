@@ -27,6 +27,7 @@ def extract_features(args):
     # Iterate over wav audio files in input directory
     for data_type in ["train", "test"]:
         path_in = os.path.join(args.input_dir, data_type)
+        count = 0
         for filename in os.listdir(path):
             # For wav files
             if filename.endswith(".wav"):
@@ -40,6 +41,8 @@ def extract_features(args):
                 # use openSMILE
                 call(["SMILExtract", "-l", "0", "-noconsoleoutput", "-i", file_in, 
                       "-c", args.config, "-D", csv_out, "-O", arff_out, "-instname", filename, "-label", args.label])
+                count++
+                print ("Done: %d" % (count))
                 
     return True
     
