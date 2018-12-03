@@ -28,6 +28,7 @@ def extract_features(args):
     for data_type in ["train", "test"]:
         path_in = os.path.join(args.input_dir, data_type)
         for filename in os.listdir(path):
+            # For wav files
             if filename.endswith(".wav"):
                 # in
                 file_in = os.path.join(path_in, filename)
